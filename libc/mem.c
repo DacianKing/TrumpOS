@@ -13,17 +13,11 @@ void memory_set(u8 *dest, u8 val, u32 len) { //gross. to fix
     for ( ; len != 0; len--) *temp++ = val;
 }
 
-void history() {
-  char *that = (char*)0xb8000;
-  kprint(that,WHITE_ON_BLACK);
-}
 
-void swap(char *s1, char *s2) { //implement xor swap.
-  char tmp;
-  tmp = *s1;
-  *s1 = *s2;
-  *s2 = tmp;
-  kprint(s1,0);
-  kprint("\n",0);
-  kprint(s2,0);
+void swap(char *x,char *y) {
+  if (x != y) {
+     *x ^= *y;
+     *y ^= *x;
+     *x ^= *y;
+ }
 }

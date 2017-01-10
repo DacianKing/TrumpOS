@@ -5,11 +5,11 @@ OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
 # -g: Use debugging symbols in gcc
 CFLAGS = -g -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs \
-		 -Wall -Wextra -Werror
+		 -Wall -Wextra -Werror 
 
 # First rule is run by default
 os-image.bin: boot/bootsect.bin kernel.bin
-	cat $^ > os-image.bin
+	cat $^ > os-image.bin && rm $^
 
 # '--oformat binary' deletes all symbols as a collateral, so we don't need
 # to 'strip' them manually on this case

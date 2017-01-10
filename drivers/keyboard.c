@@ -6,9 +6,6 @@
 #include "../libc/function.h"
 #include "../kernel/kernel.h"
 
-
-//char histarray[1000]  = { 0 };
-
 #define BACKSPACE 0x0E
 #define ENTER 0x1C
 
@@ -22,27 +19,22 @@ const char *sc_name[] = { "ERROR", "Esc", "1", "2", "3", "4", "5", "6",  //key s
         "LShift", "\\", "Z", "X", "C", "V", "B", "N", "M", ",", ".",
         "/", "RShift", "Keypad *", "LAlt", "Spacebar"};
 
-const char sc_ascii[] = { '?', '?', '1', '2', '3', '4', '5', '6', //ascii char 
+const char sc_ascii[] = { '?', '?', '1', '2', '3', '4', '5', '6', //ascii char
     '7', '8', '9', '0', '-', '=', '?', '?', 'Q', 'W', 'E', 'R', 'T', 'Y',
         'U', 'I', 'O', 'P', '[', ']', '?', '?', 'A', 'S', 'D', 'F', 'G',
         'H', 'J', 'K', 'L', ';', '\'', '`', '?', '\\', 'Z', 'X', 'C', 'V',
         'B', 'N', 'M', ',', '.', '/', '?', '?', '?', ' '};
 
 static void keyboard_callback(registers_t regs) {
-    u8 scancode = port_byte_in(0x60); //in stack,0x60
+    u8 scancode = inb(0x60); //in stack,0x60
 
     if (scancode > SC_MAX) return;  //check if scan code is legit
     if (scancode == BACKSPACE) { //if backspace, remove 2 bytes from video memory
         backspace(key_buffer);
         kprint_backspace();
         //kprint(histarray,0); testing history
-    } else if (scancode == ENTER) { //if enter, kprint_newline
+    } else if (scancode == ENTER) { //if enter, print new line
         kprint("\n",WHITE_ON_BLACK);
-          /*
-        for(int i =0; i < strlen(key_buffer); ++i) {
-          histarray[i] = key_buffer[i];
-        }
-*/
         user_input(key_buffer); //if press enter, it will run the parser in kernel.c
         key_buffer[0] = '\0';
     } else {
