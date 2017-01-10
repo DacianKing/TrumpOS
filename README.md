@@ -10,3 +10,5 @@ Level:
 4+: Very basic shell capabilities and run some c (runtime library) functions in terminal (check)
 
 4+ screenshot
+
+[Trumpos screenshot](!https://github.com/DacianKing/TrumpOS/blob/master/trumpos.png)
