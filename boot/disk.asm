@@ -24,6 +24,11 @@ disk_load:
     cmp al, dh    ; BIOS also sets 'al' to the # of sectors read. Compare it.
     jne sectors_error
     popa
+    mov ah,0x00
+    int 0x13
+    
+    mov ah,0x0D
+    int 0x13
     ret
 
 

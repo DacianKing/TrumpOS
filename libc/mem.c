@@ -22,4 +22,20 @@ void swap(char *x,char *y) {
  }
 }
 
-u32 free_mem = 0x10000;
+u32 free_mem = 0x10000; //heap pointer
+
+void *kmalloc(u32 size) {
+  void *ptr = (void*)free_mem; //base address to return
+
+  free_mem +=size;
+  return ptr;
+}
+
+/*
+void kfree(void *start,void *end) {
+  for(unsigned int i = start; i =< end; ++i) {
+    *start[i] = 0;
+  }
+
+}
+*/

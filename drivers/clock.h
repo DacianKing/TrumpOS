@@ -3,6 +3,7 @@
 
 int getTime();
 int getDate();
+void writeCMOS(char cmos_reg);
 
 
 #endif

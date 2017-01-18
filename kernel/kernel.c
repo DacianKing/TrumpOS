@@ -48,21 +48,29 @@ void user_input(char *input) {
 
   if(!strcmp(input,"WRITE")) {
       outb(0x1F6,0xA0);
-      for(int i = 0x1F2; i < 0x1F6;++i ) {
-        outb(i,0);
-      }
+
+      outb(0x1F2,0);
+      outb(0x1F3,0);
+      outb(0x1F4,0);
+      outb(0x1F5,0);
+
       outb(0x1F7,0xEC);
 
-      for(int i =0;i < 999;++i) {
-        char read = inb(0x1F7);
-        if(read > 0) {
-          kprintint(i,1);
-        }
+      for(int i =0; i < 1000; i++) {
+        char ret = inb(0x1F7);
+
+        if(ret!=0) {
+        char buf[24];
+        hex_to_ascii(i,buf);
+        kprint(buf,1);
       }
+      }
+
+
 
   }
 
-  else if(!strcmp(input,"read-file")) {
+  else if(!strcmp(input,"READFILE")) {
 
   }
 
@@ -139,10 +147,21 @@ void user_input(char *input) {
        outb(0x64, 0xFE); //reboot using keyboard to pulse the CPU's reset pin
     }
 
+    else if(!strcmp(input,"MALLOC")) {
+      char *rtr = kmalloc(100);
+
+      strcpy(rtr,"faggot");
+      kprint(rtr,1);
+    }
+
     else if(!strcmp(input,"TIME")) {
+      asm("cli");
+    //  writeCMOS(0x00);
+
       int seconds = getTime(0x00);
       int minutes = getTime(0x02);
-      int hours = getTime(0x04) + 7;
+      int hours = getTime(0x04);
+      asm("sti");
 
       kprintint(hours,GREEN_ON_BLACK);
       kprint("h : ",GREEN_ON_BLACK);
@@ -158,6 +177,7 @@ void user_input(char *input) {
       outb(0x70,0x08);
       char val = inb(0x71);
       kprint(&val,GREEN_ON_BLACK);
+
     }
     else if(!strcmp(input,"TIMER")) {
       asm("cli");

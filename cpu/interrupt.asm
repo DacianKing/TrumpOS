@@ -31,6 +31,7 @@ isr_common_stub:
 
 ; Common IRQ code. Identical to ISR code except for the 'call'
 ; and the 'pop ebx'
+
 irq_common_stub:
     pusha
     mov ax, ds
