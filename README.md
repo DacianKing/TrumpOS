@@ -1,6 +1,6 @@
 <h1>Git broke this page!</h1>
 
-//TODO fix CMOS, play with PIT, implement kmalloc and kfree, make pc speaker beep, and implement FAT 
+//TODO update HELP command,optimize CMOS, play with PIT, implement kmalloc and kfree, make pc speaker beep, and implement FAT 
 
 Level:
 3-: Boot in real mode (16 bits) and successfully print a message (check)
