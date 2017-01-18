@@ -150,7 +150,7 @@ void user_input(char *input) {
     else if(!strcmp(input,"MALLOC")) {
       char *rtr = kmalloc(100);
 
-      strcpy(rtr,"faggot");
+      strcpy(rtr,"malloc test");
       kprint(rtr,1);
     }
 
