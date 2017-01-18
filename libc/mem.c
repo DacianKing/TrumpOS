@@ -21,3 +21,5 @@ void swap(char *x,char *y) {
      *x ^= *y;
  }
 }
+
+u32 free_mem = 0x10000;

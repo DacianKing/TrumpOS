@@ -2,6 +2,7 @@
 #include "isr.h"
 #include "ports.h"
 #include "../libc/function.h"
+#include "../drivers/screen.h"
 
 u32 tick = 0;
 

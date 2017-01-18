@@ -12,5 +12,6 @@ void append(char s[], char n);
 int strcmp(char s1[], char s2[]);
 int strchek(char s1[],char s2[],int pos); //booleans are not implemented in standard c
 void kprintint(int number,char color);
+char *itoa(int i, char b[]);
 
 #endif

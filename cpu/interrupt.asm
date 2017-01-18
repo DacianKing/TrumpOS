@@ -15,6 +15,7 @@ isr_common_stub:
 	mov gs, ax ;reload segments
 
     ; 2. Call C handler
+	cld
 	call isr_handler
 
     ; 3. Restore state
